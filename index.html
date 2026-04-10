@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SBTI Test</title>
+</head>
+<body>
+
+<h1>SBTI Personality Test</h1>
+
+<div id="quiz">
+  <p>1. 你喜欢周末做什么？</p>
+  <button onclick="next()">打游戏</button>
+  <button onclick="next()">睡觉</button>
+
+  <p>2. 你是外向还是内向？</p>
+  <button onclick="next()">外向</button>
+  <button onclick="next()">内向</button>
+</div>
+
+<button onclick="showResult()">提交测试</button>
+
+<h2 id="result" style="display:none;"></h2>
+
+<script>
+function next() {
+  // 什么都不用做，纯装
+}
+
+function showResult() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("result").innerText = "分析完成... 你是 gay";
+}
+</script>
+
+</body>
+</html>
