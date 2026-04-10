@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>SBTI 性格测试</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e3f2fd, #ffffff);
+  text-align: center;
+  padding: 40px;
+}
+
+.container {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progress {
+  height: 10px;
+  width: 0%;
+  background: #4CAF50;
+  transition: 0.3s;
+}
+
+.question {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #4CAF50;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+#result {
+  display: none;
+  font-size: 22px;
+  margin-top: 20px;
+}
+
+#loading {
+  display: none;
+  color: #666;
+  margin-top: 20px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <h1>SBTI 性格测试</h1>
+  <p>分析你的真实人格类型</p>
+
+  <div class="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="loading">正在深度分析你的性格数据...</div>
+  <div id="result"></div>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "周末你更倾向？",
+    a: ["打游戏", "出门社交"]
+  },
+  {
+    q: "你更像？",
+    a: ["理性派", "感性派"]
+  },
+  {
+    q: "做决定时你会？",
+    a: ["快速决定", "犹豫很久"]
+  },
+  {
+    q: "朋友眼中的你？",
+    a: ["搞笑型", "安静型"]
+  },
+  {
+    q: "你更喜欢？",
+    a: ["独处", "热闹"]
+  }
+];
+
+let current = 0;
+
+function loadQuestion() {
+  let quiz = document.getElementById("quiz");
+  let progress = document.getElementById("progress");
+
+  progress.style.width = ((current) / questions.length) * 100 + "%";
+
+  if (current < questions.length) {
+    let q = questions[current];
+    quiz.innerHTML = `
+      <div class="question">${current + 1}. ${q.q}</div>
+      <button onclick="next()">${q.a[0]}</button>
+      <button onclick="next()">${q.a[1]}</button>
+    `;
+  } else {
+    showResult();
+  }
+}
+
+function next() {
+  current++;
+  loadQuestion();
+}
+
+function showResult() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("progress").style.width = "100%";
+
+  let loading = document.getElementById("loading");
+  let result = document.getElementById("result");
+
+  loading.style.display = "block";
+
+  setTimeout(() => {
+    loading.innerText = "匹配人格模型...";
+  }, 1000);
+
+  setTimeout(() => {
+    loading.innerText = "生成分析报告...";
+  }, 2000);
+
+  setTimeout(() => {
+    loading.style.display = "none";
+    result.style.display = "block";
+
+    result.innerHTML = `
+      <p>你的 SBTI 类型是：</p>
+      <h2>gay</h2>
+      <p>你具有独特的个性与魅力，结果仅供娱乐参考。</p>
+    `;
+  }, 3000);
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
